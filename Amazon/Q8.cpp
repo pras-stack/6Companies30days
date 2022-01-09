@@ -1,4 +1,4 @@
-QUESTION : https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1#
+QUESTION : https://practice.geeksforgeeks.org/problems/count-ways-to-nth-stairorder-does-not-matter1322/1/#
 
 Solution : 
 int t[46]={0};
