@@ -1,33 +1,39 @@
 Question : https://practice.geeksforgeeks.org/problems/burning-tree/1/#
 Solution : 
 
-class Solution {
+class Solution{
+    int ans=0;
+  pair<int,bool> dfs(Node* root, int t)
+  {
+      if(root==NULL)
+      {
+          return {0, false};
+      }
+      if(root->data==t){
+          ans=max(dfs(root->left, t).first, dfs(root->right, t).first);
+          return {1, true};
+      }
+      pair<int,bool> left = dfs(root->left, t), right = dfs(root->right, t);
+      if(left.second)
+      {
+          ans=max(ans, right.first+left.first);
+          return {left.first+1, true};
+      }
+    else if(right.second)
+      {
+          ans=max(ans, right.first+left.first);
+          return {right.first+1, true};
+      } 
+    else
+    {
+          return {max(left.first, right.first)+1, false};
+      }
+  }
   public:
-int ans=0;
-   int diamete(Node* root,int t) {
-      if(root==NULL) return 0;
-      int x=diamete(root->left,t),y=diamete(root->right,t);
-if(root->data==t)
-{
-   ans=max(x,y);
-   return -1;
-}
-if(x<0) { x=abs(x);
-   ans=max(ans,x+y);
-   return -1-x;
-}
-if(y<0) { y=abs(y);
-   ans=max(ans,x+y);
-   return -1-y;
-}
-if(x<y) return(y+1);
-else return x+1;
-  
-   }
-
-   int minTime(Node* root, int target) 
-   {  
-      diamete(root,target);
-      return ans;
-   }
+    int minTime(Node* root, int target) 
+    {
+        
+        dfs(root, target);
+        return ans;
+    }
 };
